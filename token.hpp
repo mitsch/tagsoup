@@ -44,7 +44,7 @@ namespace ts
 		/// @param x value to set token
 		/// @details This constructor forwards the parameter \a to some auxiliary constructors which helps to find the
 		///				correct recursion level to set \a x
-		template <typename X, typename = typename std::enable_if<__contains_type<X, T1, T2, Ts ...>::value>::type>
+		template <typename X, typename = typename std::enable_if<contains_type<X, T1, T2, Ts ...>::value>::type>
 		_token_values(X && x) : _token_values(std::forward<X>(x), std::integral_constant<bool, std::is_same<X, T1>::value>())
 		{}
 
@@ -268,7 +268,7 @@ namespace ts
 	template <typename T, typename ... Ts>
 	struct token
 	{
-		static_assert(!__contains_duplicate<T, Ts ...>::value, "list of template parameter is not free of duplicates!");
+		static_assert(!contains_duplicate<T, Ts ...>::value, "list of template parameter is not free of duplicates!");
 
 		using signature = token_signature<T, Ts ...>;
 
